@@ -1,5 +1,7 @@
-import { FaSpinner } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import Data from "./Data";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FaCompactDisc } from "react-icons/fa";
 import "../App.css";
 
 const Spinner = () => {
@@ -7,11 +9,11 @@ const Spinner = () => {
     const [showData, setShowData] = useState(false);
 
     useEffect(() => {
-        fetch("https://jsonplaceholder.typicode.com/comments?_delay=2000&T")
+        fetch("https://jsonplaceholder.typicode.com/comments?_delay=2000&t=")
             .then((response) => response.json())
             .then((result) => {
-                setData(result);
                 setTimeout(() => {
+                    setData(result);
                     setShowData(true);
                 }, 2000);
             });
@@ -20,14 +22,12 @@ const Spinner = () => {
     return (
         <div id="spinner">
             {showData ? (
-                <ul>
-                    {data.map((d, i) => (
-                        <li key={i}>{d.name}</li>
-                    ))}
-                </ul>
+                <div>
+                    <Data data={data} />
+                </div>
             ) : (
                 <div id="fas">
-                    <FaSpinner color={"#fff"} />
+                    <FaCompactDisc />
                 </div>
             )}
         </div>
